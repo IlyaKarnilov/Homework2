@@ -126,7 +126,7 @@ namespace ConsoleApp1
             double first, second;
             Console.Clear();
             Console.WriteLine("Choose operation: \nsum of two numbers = \"+\" \nsum of a series of numbers = \"+++\" \ndiff of two numbers = \"-\" " +
-                              "\nmultiplication of two numbers = \"*\" \ndividing of two numbers = \"/\" ");
+                              "\nmultiplication of two numbers = \"*\" \ndividing of two numbers = \"/\" \nexponentiation numbers = \"^\" \nfactorial = \"!\"");
             string operation = Console.ReadLine();
             switch (operation)
             {
@@ -148,6 +148,25 @@ namespace ConsoleApp1
                     Console.WriteLine("Second value");
                     second = InputDoubleValue();
                     Console.WriteLine($"{first} * {second} = {first*second}");break;
+                case "^":
+                    Console.WriteLine("First value");
+                    first = InputDoubleValue();
+                    Console.WriteLine("Second value");
+                    second = InputDoubleValue();
+                    Console.WriteLine ($"{first} ^ {second} = {Math.Pow(first, second)}");break;
+                case "!":
+                    Console.WriteLine("value");
+                    first = InputDoubleValue();
+                    second = Factorial(first);
+                    if (second != 0)
+                    {
+                        Console.WriteLine($"!{first} = {second}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid value");
+                    }
+                    break;
                 case "/":
                     Console.WriteLine("First value");
                     first = InputDoubleValue();
@@ -166,6 +185,13 @@ namespace ConsoleApp1
                         break;
                 default: Console.WriteLine("Incorrect operation");break;
             }
+        }
+
+        static double Factorial(double value)
+        {
+            if (value == 0){return 1;}
+            else if (value < 0) { return 0;}
+            else {return value * Factorial(value - 1);}
         }
     }
 }
