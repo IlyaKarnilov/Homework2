@@ -126,7 +126,7 @@ namespace ConsoleApp1
             double first, second;
             Console.Clear();
             Console.WriteLine("Choose operation: \nsum of two numbers = \"+\" \nsum of a series of numbers = \"+++\" \ndiff of two numbers = \"-\" " +
-                              "\nmultiplication of two numbers = \"*\" \ndividing of two numbers = \"/\" \nexponentiation numbers = \"^\" \nfactorial = \"!\"");
+                              "\nmultiplication of two numbers = \"*\" \ndividing of two numbers = \"/\" \nexponentiation numbers = \"^\" \nfactorial = \"!\" \nequation = \"equ\"");
             string operation = Console.ReadLine();
             switch (operation)
             {
@@ -173,7 +173,7 @@ namespace ConsoleApp1
                     Console.WriteLine("Second value");
                     second = InputDoubleValue();
                     Console.WriteLine($"{first} / {second} = {first/second}");break;
-                    case "+++": Console.WriteLine("to stop enter 0");
+                case "+++": Console.WriteLine("to stop enter 0");
                         double sum = 0;
                         double value = 1;
                         while (value != 0)
@@ -183,15 +183,57 @@ namespace ConsoleApp1
                         } 
                         Console.WriteLine($"sum = {sum}");
                         break;
+                case "equ":
+                    Console.WriteLine("Enter equation (value operation value)");
+                    string line = Console.ReadLine();
+                    string eqe = EquationInput(line);
+                    if (eqe == null)
+                    {
+                        break;
+                    }
+                    Console.WriteLine($"{line} = {eqe}");
+                    break;
                 default: Console.WriteLine("Incorrect operation");break;
             }
         }
-
         static double Factorial(double value)
         {
             if (value == 0){return 1;}
             else if (value < 0) { return 0;}
             else {return value * Factorial(value - 1);}
         }
+        static string EquationInput(string line)
+        {
+            string[] words = line.Split(' ');
+            if (words.Length != 3)
+            {
+                Console.WriteLine("Incorrect equation");
+            }
+            double sum = 0;
+            double first;
+            if (!double.TryParse(words[0], out first))
+            {
+                Console.WriteLine("Incorrect equation");
+                return null;
+            }
+            double second;
+            if (!double.TryParse(words[2], out second))
+            {
+                Console.WriteLine("Incorrect equation");
+                return null;
+            }
+
+            switch (words[1])
+            {
+                case "+" : sum = first + second;break;
+                case "-" : sum = first - second;break;
+                case "*" : sum = first * second;break;
+                case "/" :
+                    if (second != 0) sum = first / second;
+                    else return null;break;
+            }
+            string strSum = sum.ToString();
+            return strSum;
+        } // Vvodit' prostoe yrovnenie tipa "12 + 3"  
     }
 }
