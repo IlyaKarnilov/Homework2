@@ -39,12 +39,8 @@ namespace ConsoleApp1
                             stop = Console.ReadLine();
                         }break;
                     case "calculator":
-                        while (stop!="stop")
-                        {
-                            Calculator();
-                            Console.WriteLine("To escape enter \"stop\", to continue press any button");
-                            stop = Console.ReadLine();
-                        }break;
+                        Calculator();
+                        break;
                     case "stop":break;
                     default:
                         Console.WriteLine("Invalid command");break;
@@ -126,7 +122,8 @@ namespace ConsoleApp1
             double first, second;
             Console.Clear();
             Console.WriteLine("Choose operation: \nsum of two numbers = \"+\" \nsum of a series of numbers = \"+++\" \ndiff of two numbers = \"-\" " +
-                              "\nmultiplication of two numbers = \"*\" \ndividing of two numbers = \"/\" \nexponentiation numbers = \"^\" \nfactorial = \"!\" \nequation = \"equ\"");
+                              "\nmultiplication of two numbers = \"*\" \ndividing of two numbers = \"/\" \nexponentiation numbers = \"^\" " +
+                              "\nfactorial = \"!\" \nequation = \"equ\" \nto stop - \"stop\"" );
             string operation = Console.ReadLine();
             switch (operation)
             {
@@ -193,8 +190,13 @@ namespace ConsoleApp1
                     }
                     Console.WriteLine($"{line} = {eqe}");
                     break;
+                case "stop":Console.Clear(); return;
                 default: Console.WriteLine("Incorrect operation");break;
             }
+            Console.WriteLine("To continue press any button");
+            Console.ReadLine();
+            Console.Clear();
+            Calculator();
         }
         static double Factorial(double value)
         {
